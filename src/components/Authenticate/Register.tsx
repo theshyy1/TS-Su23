@@ -10,7 +10,6 @@ const UserSchema = Joi.object({
 })
 
 const Register = () => {
-     
     const navigate = useNavigate();
     const { register,handleSubmit } = useForm<User>();
 

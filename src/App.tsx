@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Product, Category, User } from './interface';
 import { Login, Register, Users, UpdateUser, Home,Products  } from './export';
 import { AddProduct, UpdateProduct, About, UpdateCategory, AddCategory, Categories} from './export';
+import Homepage from './components/Homepage';
 
 const App = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -23,6 +24,15 @@ const App = () => {
     };
     getData();
   }, [])
+  
+  async function getCate(id:number | string)  {
+      if(id === 1 || id === 2) {
+        setProducts(products.filter((p: Product) => p.id === id));
+      } else {
+        const products = await axios.get("http://localhost:3000/products");
+        setProducts(products.data);
+      }
+  }
   
   const addProduct = async (product: Product) => {
       try {
@@ -89,6 +99,7 @@ const App = () => {
       <Router>
         <Home />
         <Routes>
+          <Route path='/' element={<Homepage products={products} getCate={getCate} />} />
           <Route path='/products' element={<Products products={products} delProduct={delProduct} />} />
           <Route path='/products/add' element={<AddProduct addProduct={addProduct} />} />
           <Route path='/products/update/:id' element={<UpdateProduct products={products} updProduct={updProduct}/>} />
