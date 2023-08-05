@@ -1,4 +1,3 @@
-import React from 'react'
 import { Product } from '../../interface'
 import ProductItem from './ProductItem';
 
@@ -8,10 +7,10 @@ interface Props {
 }
 
 const Products = ({products, delProduct}: Props) => {
-    
   return (
-    <div className='text-center'>
+    <div className='text-center container'>
         <h1 className='text-center text-3xl'>Table Products</h1>
+        <a href="/products/add" className='btn btn-secondary'>ADD ITEM</a>
         <table className='table'>
             <thead>
                 <tr>
@@ -19,6 +18,8 @@ const Products = ({products, delProduct}: Props) => {
                     <th>Name</th>
                     <th>Price</th>
                     <th>Image</th>
+                    <th>CategoryId</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>

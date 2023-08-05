@@ -3,4 +3,18 @@ export interface Product {
     name: string;
     price: number;
     image?: string;
+    categoryId: number;
+    description: string;
+}
+
+export interface Category {
+    id: number;
+    name: string;
+}
+
+export interface User {
+    id: number;
+    name: string;
+    password: string;
+    roleId?: number;
 }
