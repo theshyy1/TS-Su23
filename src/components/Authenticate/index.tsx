@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { User } from '../../interface';
 import { useNavigate, Link  } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 
 interface Props {
     users: User[];
@@ -12,13 +13,13 @@ const Login = ({ users }: Props) => {
 
     const onSubmit = (data: User) => {
         const user = users.find((u: User) => u.name === data.name);
-
         if(!user) {
             alert("user not found");
             return;
         }
 
-        if(user.password !== data.password) {
+        const matched = bcrypt.compareSync(data.password, user.password);
+        if(!matched) {
             alert("Wrong password")
             return;
         } else {

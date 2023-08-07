@@ -19,6 +19,7 @@ interface Props {
 const UpdateUser = (props: Props) => {
     const navigate = useNavigate();
     const { register,handleSubmit, reset } = useForm<User>();
+
     const { id } = useParams();
     const { users, updUser } = props;
 

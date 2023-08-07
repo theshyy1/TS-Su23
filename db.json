@@ -68,6 +68,28 @@
       "name": "trung",
       "password": "12345",
       "id": 3
+    },
+    {
+      "name": "vuquynh",
+      "password": "vuquynh",
+      "id": 5
+    },
+    {
+      "name": "vuanhquynh",
+      "password": "$2a$10$MNprmYPwGXPKro1KJZumfu3OZqj.ODNoCIjfaSCGlu5PFBbsGvKxu",
+      "id": 6
+    },
+    {
+      "name": "hoangtrung12",
+      "password": "$2a$10$XTBPEaatNnaG2CpyMUWTNuf2fvnXGlZh3hweJjFNKpO9q36doFG.O",
+      "roleId": 2,
+      "id": 7
+    },
+    {
+      "name": "hoangtrung12",
+      "password": "$2a$10$zZpk83QHxc06/xcZYO0SZemk7ivohLB0q.yOywUZyyt1gjXQDXY8m",
+      "roleId": 2,
+      "id": 8
     }
   ],
   "roles": [

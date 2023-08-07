@@ -1,25 +1,43 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { User } from '../../interface';
-import { useNavigate  } from 'react-router-dom';
+import { useMatch, useNavigate  } from 'react-router-dom';
 import Joi from 'joi';
+import bcrypt from 'bcryptjs';
+
+interface Props {
+    users: User[];
+}
 
 const UserSchema = Joi.object({
     name: Joi.string().trim().required(),
-    password: Joi.string().required()
+    password: Joi.string().required(),
+    confirmpassword: Joi.string().valid(Joi.ref("password")).required().messages({
+        "any.only": "Confirm password is not match"
+    })
 })
 
-const Register = () => {
+const Register = ({ users }: Props) => {
     const navigate = useNavigate();
     const { register,handleSubmit } = useForm<User>();
 
     const onSubmit = async (data: User) => {
         const { error } = UserSchema.validate(data);
+        
         if(error) {
-            alert(error.message);
+            alert(error.details.map(err => err.message));
             return;
         }
-        await axios.post("http://localhost:3000/users", data);
+
+        const userMatched = users.find((u: User) => u.name === data.name);
+        if(userMatched) {
+            alert("User already exists");
+            return;
+        }
+        const hashPassword = bcrypt.hashSync(data.password, 10);
+
+        const newUser = { name: data.name, password: hashPassword, roleId: 2 };
+        await axios.post("http://localhost:3000/users", newUser);
         navigate("/login");
         alert("Create a new user successfully");
     }
@@ -36,6 +54,10 @@ const Register = () => {
                 <div className="mb-3">
                     <label className="form-label">Password</label>
                     <input type="password" className="form-control" placeholder="Password" {...register('password')}/>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Confirm password</label>
+                    <input type="password" className="form-control" placeholder="Confirm password" {...register('confirmpassword')}/>
                 </div>
                 <div className="mb-3">
                     <div className="form-check">
