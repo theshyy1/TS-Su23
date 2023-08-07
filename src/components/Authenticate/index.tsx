@@ -2,14 +2,19 @@ import { useForm } from 'react-hook-form';
 import { User } from '../../interface';
 import { useNavigate, Link  } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
-interface Props {
-    users: User[];
-}
+// interface Props {
+//     users: User[];
+// }
 
-const Login = ({ users }: Props) => {
+const Login = () => {
     const navigate = useNavigate();
     const { register,handleSubmit } = useForm<User>();
+    const { users } = useContext(UserContext);
+    console.log(users);
+    
 
     const onSubmit = (data: User) => {
         const user = users.find((u: User) => u.name === data.name);

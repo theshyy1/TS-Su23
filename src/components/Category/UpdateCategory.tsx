@@ -3,21 +3,25 @@ import { useNavigate, useParams } from 'react-router';
 import { useEffect } from 'react';
 import { Category } from '../../interface';
 import Joi from 'joi';
+import { CategoriesContext } from '../../context/CategoriesContext';
+import { useContext } from 'react';
 
-interface Props {
-    category: Category[];
-    updCategory: (id: number, category: Category) => Promise<void>
-}
+
+// interface Props {
+//     category: Category[];
+//     updCategory: (id: number, category: Category) => Promise<void>
+// }
 
 const CateSchema = Joi.object({
     id: Joi.number().required(),
     name: Joi.string().trim().required()
 })
 
-const UpdateCategory = ( props : Props) => {
+const UpdateCategory = () => {
     const { id } = useParams();
-    const { category, updCategory } = props;
+    const { category, updCategory } = useContext(CategoriesContext);
     const navigate = useNavigate();
+    
     const {
         register,
         handleSubmit,
@@ -27,7 +31,7 @@ const UpdateCategory = ( props : Props) => {
     useEffect(() => {
         const currentProduct = category.find((cate: Category) => cate.id === Number(id));
         reset(currentProduct)
-    }, [props])
+    }, [category])
     
     const onSubmit = async (data: Category) => {
         const { error } = CateSchema.validate(data);

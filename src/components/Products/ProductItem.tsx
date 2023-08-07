@@ -1,12 +1,15 @@
+import { useContext } from 'react';
 import { Product } from '../../interface'
+import { ProductContext } from '../../context/ProductsContext';
 
 interface Props {
     product: Product;
-    delProduct: (id: number) => void;
 }
 
-const ProductItem = ({product, delProduct}: Props) => {
+const ProductItem = ({product}: Props) => {
     const { id, name, price, image, categoryId } = product;
+    const { delProduct } = useContext(ProductContext);
+
   return (
         <tr>
             <td>{id}</td>

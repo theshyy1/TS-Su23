@@ -4,10 +4,12 @@ import { User } from '../../interface';
 import { useMatch, useNavigate  } from 'react-router-dom';
 import Joi from 'joi';
 import bcrypt from 'bcryptjs';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
-interface Props {
-    users: User[];
-}
+// interface Props {
+//     users: User[];
+// }
 
 const UserSchema = Joi.object({
     name: Joi.string().trim().required(),
@@ -17,9 +19,10 @@ const UserSchema = Joi.object({
     })
 })
 
-const Register = ({ users }: Props) => {
+const Register = () => {
     const navigate = useNavigate();
     const { register,handleSubmit } = useForm<User>();
+    const { users } = useContext(UserContext);
 
     const onSubmit = async (data: User) => {
         const { error } = UserSchema.validate(data);

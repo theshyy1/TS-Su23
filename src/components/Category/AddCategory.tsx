@@ -2,16 +2,20 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { Category } from '../../interface';
 import joi from 'joi';
+import { CategoriesContext } from '../../context/CategoriesContext';
+import { useContext } from 'react';
 
-interface Props {
-    addCategory: (category: Category) => Promise<void>
-}
+
+// interface Props {
+//     addCategory: (category: Category) => Promise<void>
+// }
 
 const CateSchema = joi.object({
-    name: joi.string().trim().required
+    name: joi.string().trim().required()
 })
 
-const AddCategory = ({ addCategory }: Props) => {
+const AddCategory = () => {
+    const { addCategory } = useContext(CategoriesContext);
     const navigate = useNavigate();
     const {
         register,
@@ -24,8 +28,9 @@ const AddCategory = ({ addCategory }: Props) => {
             alert(error.message);
             return;
         }
+
         await addCategory(data);
-        navigate('/categories');
+        navigate('/category');
     }
 
     return (

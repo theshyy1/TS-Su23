@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Category } from '../../interface'
 import CateItem from './CateItem';
+import { CategoriesContext } from '../../context/CategoriesContext';
 
-interface Props {
-    category: Category[];
-    delCategory: (id: number) => void;
-}
+// interface Props {
+//     category: Category[];
+//     delCategory: (id: number) => void;
+// }
 
-const Categories = ({ category, delCategory }: Props) => {
+const Categories = () => {
+    const { delCategory, category } = useContext(CategoriesContext);
+    
   return (
     <> 
         <div className="container">
             <h1>Category</h1>
+            <a href="/category/add" className='btn btn-success'>ADD NEW</a>
             <table className='table'>
                 <thead>
                     <tr>

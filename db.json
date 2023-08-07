@@ -1,22 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Product 1 update 2",
-      "price": "100000",
-      "image": "https://picsum.photos/100/100 ",
-      "description": "Description 1",
-      "categoryId": "2"
-    },
-    {
-      "id": 2,
-      "name": "Product 2",
-      "price": 200,
-      "image": "https://picsum.photos/100/100 ",
-      "description": "Description 2",
-      "categoryId": 2
-    },
-    {
       "id": 3,
       "name": "Product 3",
       "price": 300,
@@ -31,30 +15,26 @@
       "description": "Delicious",
       "categoryId": "1",
       "id": 4
-    },
-    {
-      "name": "ew",
-      "price": "11",
-      "image": "https://picsum.photos/100/100",
-      "description": "2323",
-      "categoryId": "2",
-      "id": 5
     }
   ],
   "categories": [
     {
       "id": 1,
-      "name": "Danh muc 1"
+      "name": "Danh muc 12"
     },
     {
-      "id": 2,
-      "name": "Danh muc 2"
+      "name": "Danh muc 3",
+      "id": 2
+    },
+    {
+      "name": "Danh muc 12",
+      "id": 3
     }
   ],
   "users": [
     {
       "id": 1,
-      "name": "admin11",
+      "name": "admin11222",
       "password": "123456",
       "roleId": 1
     },

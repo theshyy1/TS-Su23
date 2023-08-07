@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import { Product } from '../../interface'
 import ProductItem from './ProductItem';
+import { ProductContext } from '../../context/ProductsContext';
 
-interface Props {
-    products: Product[];
-    delProduct: (id: number) => void;
-}
+// interface Props {
+//     products: Product[];
+//     delProduct: (id: number) => void;
+// }
 
-const Products = ({products, delProduct}: Props) => {
+const Products = () => {
+    const { products } = useContext(ProductContext);
+    
   return (
     <div className='text-center container'>
         <h1 className='text-center text-3xl'>Table Products</h1>
@@ -25,7 +29,7 @@ const Products = ({products, delProduct}: Props) => {
             <tbody>
                 { products.map((item: Product) => {
                     return (
-                        <ProductItem key={item.id} product={item} delProduct={delProduct} />
+                        <ProductItem key={item.id} product={item} />
                     )
                 })}
             </tbody>

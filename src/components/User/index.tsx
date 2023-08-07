@@ -1,10 +1,13 @@
+import { useContext } from 'react';
 import { User } from '../../interface'
+import { UserContext } from '../../context/UserContext';
 
-interface Props {
-    users: User[];
-}
+// interface Props {
+//     users: User[];
+// }
 
-const Users = ({ users }: Props) => {
+const Users = () => {
+    const { users } = useContext(UserContext);
   return (
     <div className='container'>
         <h1 className='text-center'>All Users</h1>

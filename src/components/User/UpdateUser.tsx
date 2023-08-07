@@ -2,7 +2,8 @@ import { useForm } from 'react-hook-form';
 import { User } from '../../interface';
 import { useNavigate, useParams  } from 'react-router-dom';
 import Joi from 'joi';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 const UserSchema = Joi.object({
     id: Joi.number().required(),
@@ -11,22 +12,22 @@ const UserSchema = Joi.object({
     roleId: Joi.number()
 })
 
-interface Props {
-    users: User[];
-    updUser: (id: number, user: User) => Promise<void>
-}
+// interface Props {
+//     users: User[];
+//     updUser: (id: number, user: User) => Promise<void>
+// }
 
-const UpdateUser = (props: Props) => {
+const UpdateUser = () => {
     const navigate = useNavigate();
     const { register,handleSubmit, reset } = useForm<User>();
 
     const { id } = useParams();
-    const { users, updUser } = props;
+    const { users, updUser } = useContext(UserContext);
 
     useEffect(() => {
         const currentProduct = users.find((user: User) => user.id === Number(id));
         reset(currentProduct)
-    }, [props])
+    }, [users])
 
     const onSubmit = async (data: User) => {
         const { error } = UserSchema.validate(data);

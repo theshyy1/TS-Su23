@@ -1,13 +1,14 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { Product } from '../../interface'
 import { useParams, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import joi from 'joi';
+import { ProductContext } from '../../context/ProductsContext';
 
-interface Props {
-    products: Product[];
-    updProduct: (id: number, product: Product) => void;
-}
+// interface Props {
+//     products: Product[];
+//     updProduct: (id: number, product: Product) => void;
+// }
 
 const ProductSchema = joi.object({
     id: joi.number().required,
@@ -18,9 +19,9 @@ const ProductSchema = joi.object({
     categoryid: joi.string().trim().required()
 })
 
-const UpdateProduct = ( props: Props ) => {
+const UpdateProduct = () => {
     const { id } = useParams();
-    const { products, updProduct } = props;
+    const { products, updProduct } = useContext(ProductContext);
 
     const { register, handleSubmit, reset } = useForm<Product>();
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const UpdateProduct = ( props: Props ) => {
     useEffect(() => {
         const currentProduct = products.find((product: Product) => product.id === Number(id));
         reset(currentProduct)
-    }, [props])
+    }, [products])
 
     const onSubmit = async (data: Product) => {
         const { error } = ProductSchema.validate(data);

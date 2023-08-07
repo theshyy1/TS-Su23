@@ -2,26 +2,26 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { Product } from '../../interface';
 import joi from 'joi';
+import { useContext } from 'react';
+import { ProductContext } from '../../context/ProductsContext';
 
-interface Props {
-    addProduct: (product: Product) => Promise<void>
-}
+// interface Props {
+//     addProduct: (product: Product) => Promise<void>
+// }
 
 const ProductSchema = joi.object({
     name: joi.string().trim().required(),
     price: joi.number().integer().min(1).required(),
     image: joi.string().trim().required(),
     description: joi.string().trim().required(),
-    categoryid: joi.string().trim().required()
+    categoryId: joi.string().trim().required()
 })
 
-const AddProduct = ({ addProduct}: Props) => {
-    const navigate = useNavigate();
-    const {
-        register,
-        handleSubmit
-        } = useForm<Product>();
+const AddProduct = () => {
+    const { addProduct } = useContext(ProductContext);
+    const { register, handleSubmit } = useForm<Product>();
     
+    const navigate = useNavigate();
     const onSubmit = async (data: Product) => {
         const { error } = ProductSchema.validate(data);
         if(error) {

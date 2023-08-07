@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Product } from '../interface'
+import { ProductContext } from '../context/ProductsContext';
 
-interface Props {
-  products: Product[];
-  getCate: (id: number | string) => void;
-}
+// interface Props {
+//   getCate: (id: number | string) => void;
+// }
 
-const Homepage = ({ products, getCate }: Props) => {
+const Homepage = () => {
+  const { products, getCate } = useContext(ProductContext);
+
   return (
     <div className="container">
       <div className="container-btn">
@@ -17,7 +19,7 @@ const Homepage = ({ products, getCate }: Props) => {
       <div className="row gap-4 m-4">
         { products.map((product: Product) => {
           return (
-            <div className="card col-4 col-span-4" style={{width: 18 + 'rem'}}>
+            <div className="card col-4 col-span-4" style={{width: 18 + 'rem'}} key={product.id}>
                 <img src={product.image} className="card-img-top p-2" alt={product.name}/>
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
