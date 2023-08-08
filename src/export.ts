@@ -10,7 +10,8 @@ import UpdateUser from './components/User/UpdateUser';
 import Home from './components/Home';
 import Products from './components/Products';
 import About from './components/About';
+import Homepage from './components/Homepage';
 
 
 export { AddProduct, UpdateProduct, UpdateCategory, AddCategory, Categories, Login };
-export { Register, Users, UpdateUser, Home, Products, About }
+export { Register, Users, UpdateUser, Home, Products, About, Homepage }

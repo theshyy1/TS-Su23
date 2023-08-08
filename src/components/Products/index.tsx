@@ -14,7 +14,7 @@ const Products = () => {
   return (
     <div className='text-center container'>
         <h1 className='text-center text-3xl'>Table Products</h1>
-        <a href="/products/add" className='btn btn-secondary'>ADD ITEM</a>
+        <a href="/admin/products/add" className='btn btn-secondary'>ADD ITEM</a>
         <table className='table'>
             <thead>
                 <tr>

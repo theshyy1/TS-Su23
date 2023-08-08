@@ -4,6 +4,7 @@ import { useNavigate, Link  } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import background from '../../assets/background.jpg';
 
 // interface Props {
 //     users: User[];
@@ -35,6 +36,9 @@ const Login = () => {
   return (
     <div className="container">
         <h1 className='text-center'>Login</h1>
+        <div>
+            <img src={background} style={{width: '100%', position: 'fixed', top: '0', left: '0', opacity: '.6', zIndex: '-5'}} />
+        </div>
         <div className="">
             <form className="px-4 py-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">

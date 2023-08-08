@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
-import { Product } from '../../interface';
+import { Category, Product } from '../../interface';
 import joi from 'joi';
 import { useContext } from 'react';
 import { ProductContext } from '../../context/ProductsContext';
+import { CategoriesContext } from '../../context/CategoriesContext';
 
 // interface Props {
 //     addProduct: (product: Product) => Promise<void>
@@ -19,7 +20,9 @@ const ProductSchema = joi.object({
 
 const AddProduct = () => {
     const { addProduct } = useContext(ProductContext);
+    const { category } = useContext(CategoriesContext);
     const { register, handleSubmit } = useForm<Product>();
+    console.log(category);
     
     const navigate = useNavigate();
     const onSubmit = async (data: Product) => {
@@ -28,9 +31,9 @@ const AddProduct = () => {
             alert(error.message);
             return;
         }
-
+        
         await addProduct(data);
-        navigate('/products');
+        navigate('/admin/products');
     }
 
     return (
@@ -54,7 +57,14 @@ const AddProduct = () => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">CategoryId</label>
-                    <input placeholder='Category product' id="price" className='form-control' {...register('categoryId', { pattern: /\d+/ })} />
+                    <select id="" {...register('categoryId')}>
+                        <option value="" disabled>Chon 1</option>
+                        { category.map((cate: Category) => {
+                            return (
+                                <option key={cate.id} value={cate.id}>{cate.name}</option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary">ADD</button>
             </form>

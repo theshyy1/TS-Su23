@@ -7,10 +7,11 @@ import { UserContext } from '../../context/UserContext';
 // }
 
 const Users = () => {
-    const { users } = useContext(UserContext);
+    const { users, delUser } = useContext(UserContext);
   return (
     <div className='container'>
         <h1 className='text-center'>All Users</h1>
+        <a href="/admin/users/add" className='btn btn-secondary'>ADD USER</a>
         <table className='table'>
             <thead>
                 <tr>
@@ -28,7 +29,7 @@ const Users = () => {
                             <td>{user.name}</td>
                             <td>{user.roleId}</td>
                             <td>
-                                <button className='btn btn-warning'>Del</button>
+                                <button onClick={delUser.bind(this, user.id)} className='btn btn-warning'>Del</button>
                                 <a href={`/users/update/${user.id}`} className='btn btn-secondary'>Update</a>
                             </td>
                         </tr>

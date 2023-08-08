@@ -19,3 +19,8 @@ export interface User {
     confirmpassword?: string;
     roleId?: number;
 }
+
+export interface Role {
+    id: number;
+    name: string;
+}

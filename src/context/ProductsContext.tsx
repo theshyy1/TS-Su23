@@ -53,9 +53,9 @@ const ProductContextProvider = ({ children }: Props) => {
     }
 
     async function getCate(id:number | string)  {
-        if(id === 1 || id === 2) {
-          setProducts(products.filter((p: Product) => p.id === id));
-        } else {
+        if(id) {
+          setProducts(products.filter((p: Product) => p.categoryId === id));
+        } else if(id === 'all'){
           const products = await axios.get("http://localhost:3000/products");
           setProducts(products.data);
         }

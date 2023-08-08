@@ -15,7 +15,7 @@ const Categories = () => {
     <> 
         <div className="container">
             <h1>Category</h1>
-            <a href="/category/add" className='btn btn-success'>ADD NEW</a>
+            <a href="/admin/category/add" className='btn btn-success'>ADD NEW</a>
             <table className='table'>
                 <thead>
                     <tr>

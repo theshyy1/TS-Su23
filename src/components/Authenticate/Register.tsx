@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { User } from '../../interface';
-import { useMatch, useNavigate  } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import Joi from 'joi';
 import bcrypt from 'bcryptjs';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import background from '../../assets/background.jpg';
 
 // interface Props {
 //     users: User[];
@@ -48,6 +49,9 @@ const Register = () => {
   return (
     <div className="container">
         <h1 className='text-center'>Register</h1>
+        <div>
+            <img src={background} style={{width: '100%', position: 'fixed', top: '0', left: '0', opacity: '.6', zIndex: '-5'}} />
+        </div>
         <div className="">
             <form className="px-4 py-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">

@@ -15,8 +15,9 @@ const CateSchema = joi.object({
 })
 
 const AddCategory = () => {
-    const { addCategory } = useContext(CategoriesContext);
+    const { addCategory, category } = useContext(CategoriesContext);
     const navigate = useNavigate();
+    
     const {
         register,
         handleSubmit
@@ -24,13 +25,20 @@ const AddCategory = () => {
 
     const onSubmit = async (data: Category) => {
         const { error } = CateSchema.validate(data);
+        const matched = category.find((cate: Category) => cate.name === data.name);
         if(error) {
             alert(error.message);
             return;
         }
 
+        if(matched) {
+            alert("Category already exists");
+            return;    
+        }
+        
+
         await addCategory(data);
-        navigate('/category');
+        navigate('/admin/category');
     }
 
     return (
